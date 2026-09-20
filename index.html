@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vee's Workbooks & Course Library</title>
+  <meta name="description" content="Download actionable workbooks, frameworks, and course guides for brand positioning, narrative craft, and momentum building.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-primary: #0f172a;
+      --bg-card: rgba(30, 41, 59, 0.7);
+      --bg-card-hover: rgba(51, 65, 85, 0.8);
+      --border-color: rgba(255, 255, 255, 0.1);
+      --accent-purple: #818cf8;
+      --accent-indigo: #6366f1;
+      --accent-pink: #ec4899;
+      --accent-emerald: #10b981;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg-primary);
+      color: var(--text-main);
+      min-height: 100vh;
+      line-height: 1.6;
+      background-image: 
+        radial-gradient(circle at 15% 15%, rgba(99, 102, 241, 0.15) 0%, transparent 40%),
+        radial-gradient(circle at 85% 85%, rgba(236, 72, 153, 0.12) 0%, transparent 40%);
+      background-attachment: fixed;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(99, 102, 241, 0.15);
+      border: 1px solid rgba(99, 102, 241, 0.3);
+      color: var(--accent-purple);
+      padding: 0.4rem 1rem;
+      border-radius: 9999px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      margin-bottom: 1.25rem;
+    }
+
+    h1 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 2.75rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 1rem;
+    }
+
+    .subtitle {
+      font-size: 1.125rem;
+      color: var(--text-muted);
+      max-width: 650px;
+      margin: 0 auto 2rem;
+    }
+
+    .controls {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+      margin-bottom: 2.5rem;
+      align-items: center;
+    }
+
+    .search-box {
+      width: 100%;
+      max-width: 500px;
+      position: relative;
+    }
+
+    .search-box input {
+      width: 100%;
+      padding: 0.85rem 1.25rem 0.85rem 2.8rem;
+      background: rgba(30, 41, 59, 0.8);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      color: white;
+      font-size: 1rem;
+      outline: none;
+      transition: all 0.2s ease;
+    }
+
+    .search-box input:focus {
+      border-color: var(--accent-indigo);
+      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.25);
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+      pointer-events: none;
+    }
+
+    .filter-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      justify-content: center;
+    }
+
+    .chip {
+      background: rgba(30, 41, 59, 0.6);
+      border: 1px solid var(--border-color);
+      color: var(--text-muted);
+      padding: 0.4rem 1rem;
+      border-radius: 20px;
+      font-size: 0.875rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .chip:hover, .chip.active {
+      background: var(--accent-indigo);
+      color: white;
+      border-color: var(--accent-indigo);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .card {
+      background: var(--bg-card);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 1.75rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all 0.25s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      background: var(--bg-card-hover);
+      border-color: rgba(99, 102, 241, 0.4);
+      box-shadow: 0 12px 30px -10px rgba(0, 0, 0, 0.5);
+    }
+
+    .card-category {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-weight: 700;
+      color: var(--accent-purple);
+      margin-bottom: 0.5rem;
+    }
+
+    .card-title {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 0.75rem;
+    }
+
+    .card-desc {
+      font-size: 0.925rem;
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+      flex-grow: 1;
+    }
+
+    .card-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      padding-top: 1rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      margin-bottom: 1.25rem;
+    }
+
+    .actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      padding: 0.65rem 1rem;
+      border-radius: 10px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent-indigo), #4f46e5);
+      color: white;
+      box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+    }
+
+    .btn-primary:hover {
+      opacity: 0.92;
+      transform: scale(1.02);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.06);
+      color: var(--text-main);
+      border: 1px solid var(--border-color);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.12);
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 4rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border-color);
+      color: var(--text-muted);
+      font-size: 0.875rem;
+    }
+
+    footer a {
+      color: var(--accent-purple);
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="badge">✨ Vee's Workbook Library</div>
+      <h1>Courses & Actionable Guides</h1>
+      <p class="subtitle">Download workbooks directly to your device or view online in high-resolution PDF format.</p>
+      
+      <div class="controls">
+        <div class="search-box">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="searchInput" placeholder="Search workbooks by title or topic..." onkeyup="filterWorkbooks()">
+        </div>
+        <div class="filter-chips">
+          <button class="chip active" onclick="setCategory('all', this)">All Workbooks</button>
+          <button class="chip" onclick="setCategory('brand', this)">Brand & Authority</button>
+          <button class="chip" onclick="setCategory('narrative', this)">Narrative & Story</button>
+        </div>
+      </div>
+    </header>
+
+    <div class="grid" id="workbookGrid">
+      <!-- Card 1 -->
+      <div class="card" data-category="brand" data-title="building authority">
+        <div>
+          <div class="card-category">Brand & Positioning</div>
+          <h2 class="card-title">Building Authority</h2>
+          <p class="card-desc">Practical frameworks for establishing industry expertise, trust, and premium market positioning.</p>
+        </div>
+        <div>
+          <div class="card-meta">
+            <span>📄 PDF Document</span>
+            <span>40.9 KB</span>
+          </div>
+          <div class="actions">
+            <a href="./workbooks/Building-Authority-Workbook.pdf" class="btn btn-secondary" target="_blank">👁️ Read</a>
+            <a href="https://raw.githubusercontent.com/Duckxmeta/Vee-Workbooks/main/workbooks/Building-Authority-Workbook.pdf" download class="btn btn-primary">📥 Download</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="card" data-category="brand" data-title="building atmosphere">
+        <div>
+          <div class="card-category">Brand & Environment</div>
+          <h2 class="card-title">Building Atmosphere (v2)</h2>
+          <p class="card-desc">Crafting an engaging brand presence, distinctive tone of voice, and immersive ecosystem.</p>
+        </div>
+        <div>
+          <div class="card-meta">
+            <span>📄 PDF Document</span>
+            <span>29.9 KB</span>
+          </div>
+          <div class="actions">
+            <a href="./workbooks/Building-Atmosphere-Workbook-v2.pdf" class="btn btn-secondary" target="_blank">👁️ Read</a>
+            <a href="https://raw.githubusercontent.com/Duckxmeta/Vee-Workbooks/main/workbooks/Building-Atmosphere-Workbook-v2.pdf" download class="btn btn-primary">📥 Download</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="card" data-category="brand" data-title="building momentum">
+        <div>
+          <div class="card-category">Execution & Growth</div>
+          <h2 class="card-title">Building Momentum</h2>
+          <p class="card-desc">Action plan for consistent forward motion, launch velocity, and audience retention.</p>
+        </div>
+        <div>
+          <div class="card-meta">
+            <span>📄 PDF Document</span>
+            <span>37.1 KB</span>
+          </div>
+          <div class="actions">
+            <a href="./workbooks/Building-Momentum-Workbook.pdf" class="btn btn-secondary" target="_blank">👁️ Read</a>
+            <a href="https://raw.githubusercontent.com/Duckxmeta/Vee-Workbooks/main/workbooks/Building-Momentum-Workbook.pdf" download class="btn btn-primary">📥 Download</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="card" data-category="narrative" data-title="signal and story">
+        <div>
+          <div class="card-category">Storytelling & Content</div>
+          <h2 class="card-title">Signal and Story</h2>
+          <p class="card-desc">Framework for extracting key message signals from background noise and crafting resonant stories.</p>
+        </div>
+        <div>
+          <div class="card-meta">
+            <span>📄 PDF Document</span>
+            <span>20.7 KB</span>
+          </div>
+          <div class="actions">
+            <a href="./workbooks/Signal-and-Story-Workbook.pdf" class="btn btn-secondary" target="_blank">👁️ Read</a>
+            <a href="https://raw.githubusercontent.com/Duckxmeta/Vee-Workbooks/main/workbooks/Signal-and-Story-Workbook.pdf" download class="btn btn-primary">📥 Download</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 5 -->
+      <div class="card" data-category="narrative" data-title="the narrative">
+        <div>
+          <div class="card-category">Messaging Architecture</div>
+          <h2 class="card-title">The Narrative (v2)</h2>
+          <p class="card-desc">Strategic core messaging architecture, story arcs, and customer alignment structures.</p>
+        </div>
+        <div>
+          <div class="card-meta">
+            <span>📄 PDF Document</span>
+            <span>31.1 KB</span>
+          </div>
+          <div class="actions">
+            <a href="./workbooks/The-Narrative-Workbook-v2.pdf" class="btn btn-secondary" target="_blank">👁️ Read</a>
+            <a href="https://raw.githubusercontent.com/Duckxmeta/Vee-Workbooks/main/workbooks/The-Narrative-Workbook-v2.pdf" download class="btn btn-primary">📥 Download</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <p>Vee's Workbooks & Course Library &bull; Hosted on <a href="https://github.com/Duckxmeta/Vee-Workbooks" target="_blank">GitHub</a></p>
+    </footer>
+  </div>
+
+  <script>
+    let activeCategory = 'all';
+
+    function setCategory(cat, btn) {
+      activeCategory = cat;
+      document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+      btn.classList.add('active');
+      filterWorkbooks();
+    }
+
+    function filterWorkbooks() {
+      const query = document.getElementById('searchInput').value.toLowerCase();
+      const cards = document.querySelectorAll('.card');
+
+      cards.forEach(card => {
+        const title = card.getAttribute('data-title');
+        const category = card.getAttribute('data-category');
+        const matchesCat = activeCategory === 'all' || category === activeCategory;
+        const matchesQuery = title.includes(query);
+
+        if (matchesCat && matchesQuery) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+  </script>
+</body>
+</html>
